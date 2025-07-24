@@ -31,7 +31,7 @@ vector<GPUInfo> get_gpu_info() {
     istringstream iss(buffer);
     string idx_str, mem_str;
 
-    if (getline(iss, idx_str, ",") && getline(iss, mem_str)) {
+    if (getline(iss, idx_str) && getline(iss, mem_str)) {
       GPUInfo gpu;
       gpu.index = stoi(idx_str);
       gpu.memory_free_mb = stoi(mem_str);
@@ -82,6 +82,7 @@ void choose_idle_gpu(int min_idle_gb, bool export_env) {
   if (eligible.empty()) {
     cerr << "No idle GPU found with at least " << min_idle_gb << " GB free."
          << endl;
+    exit(1);
   }
 
   random_device rd;
@@ -97,7 +98,7 @@ void choose_idle_gpu(int min_idle_gb, bool export_env) {
 }
 
 int main(int argc, char *argv[]) {
-  if (argc != 4) {
+  if (argc < 4) {
     cerr << "Usage: wg list|choose --idle <GB> [--rank|--export]" << endl;
     return 1;
   }
