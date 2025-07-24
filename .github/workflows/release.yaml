@@ -13,7 +13,7 @@ jobs:
     - name: Install deps
       run: sudo apt-get update && sudo apt install -y g++
     - name: Build Binary
-      run: g++ -std=c++17 -O2 wg src/wg.cpp
+      run: g++ -std=c++17 -O2 -o wg src/wg.cpp
     - name: Upload Binary
       uses: softprops/action-gh-release@v1
       with:
