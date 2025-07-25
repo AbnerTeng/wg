@@ -31,6 +31,16 @@ vector<GPUInfo> get_gpu_info() {
     istringstream iss(buffer);
     string idx_str, mem_str;
 
+    auto trim = [](std::string &s) {
+      s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) {
+                return !std::isspace(ch);
+              }));
+      s.erase(std::find_if(s.rbegin(), s.rend(),
+                           [](unsigned char ch) { return !std::isspace(ch); })
+                  .base(),
+              s.end());
+    };
+
     if (getline(iss, idx_str) && getline(iss, mem_str)) {
       GPUInfo gpu;
       gpu.index = stoi(idx_str);
