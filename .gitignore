@@ -1,5 +1,6 @@
 
 wg
+.vscode/
 # Prerequisites
 *.d
 
