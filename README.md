@@ -45,6 +45,14 @@ List all GPUs that currently have less than 50% of their memory free. The `--ran
 wg choose_idle --idle <GB> [--export]
 ```
 
+Or you can use it in a command like this:
+
+```bash
+eval $(wg choose_idle --idle <GB> --export)
+```
+
+to modify the environment variable in the current shell.
+
 - Injects the chosen GPU into a specified YAML file under a specified key.
 
 ```bash

@@ -164,7 +164,7 @@ void select_idle_gpu(int min_idle_gb, bool export_env, bool yaml_inject, optiona
     int chosen = eligible[dist(gen)];
 
     if (export_env) {
-        cout << "export CUDA_VISIBLE_DEVICES=" << chosen << endl;
+        setenv("CUDA_VISIBLE_DEVICES", to_string(chosen).c_str(), 1);
     } else if (yaml_inject) {
         inject_yaml(yaml_path.value(), yaml_key.value(), "cuda:" + to_string(chosen));
     } else {
