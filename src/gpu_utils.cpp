@@ -112,6 +112,11 @@ void list_busy_gpus(bool sort_by_memory, bool to_json) {
         }
     }
 
+    if (busy_gpus.empty()) {
+        cout << "No busy GPUs found." << endl;
+        return;
+    }
+
     if (sort_by_memory) {
         sort(busy_gpus.begin(), busy_gpus.end(), [](const GPUInfo &a, const GPUInfo &b) {
             return a.memory_free_mb < b.memory_free_mb;

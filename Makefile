@@ -1,5 +1,6 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -O2 -mmacosx-version-min=14.1
+# CXXFLAGS = -std=c++17 -O2 -mmacosx-version-min=14.1
+CXXFLAGS = -std=c++17 -O2
 LDFLAGS = -lyaml-cpp
 TARGET = wg
 

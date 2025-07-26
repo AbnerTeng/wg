@@ -3,7 +3,6 @@
 
 
 int main(int argc, char *argv[]) {
-  // TODO: Add help
   CLIHandler cli;
   cli.parse_args(argc, argv);
   if (cli.option == "list_idle") {

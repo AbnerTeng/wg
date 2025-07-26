@@ -1,6 +1,7 @@
 #ifndef GPU_UTILS_H
 #define GPU_UTILS_H
 
+#include <vector>
 #include <optional>
 #include <iostream>
 #include <string>
@@ -16,7 +17,7 @@ struct GPUInfo {
     }
 };
 
-vector<GPUInfo> get_gpu_info();
+std::vector<GPUInfo> get_gpu_info();
 void list_idle_gpus(int min_idle_gb, bool sort_by_memory = false, bool to_json = false);
 void list_busy_gpus(bool sort_by_memory = false, bool to_json = false);
 void inject_yaml(const string& yaml_path, const string& yaml_key, const string& cuda_index);

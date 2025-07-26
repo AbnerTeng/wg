@@ -7,27 +7,17 @@
 using namespace std;
 
 void CLIHandler::parse_args(int argc, char *argv[]) {
-    if (argc < 3) {
-        if (argv[1] == string("--help") || argv[1] == string("-h")) {
-            print_help();
-            exit(0);
-        } else{
-            cerr << "Usage: wg list_idle|list_busy|choose_idle --idle <GB>" << endl;
-            exit(1);
-        }
+    if (argv[1] == string("--help") || argv[1] == string("-h")) {
+        print_help();
+        exit(0);
     }
     string command = argv[1];
-    string option = argv[2];
 
-    if (option != "list_idle" && option != "list_busy" && option != "choose_idle") {
-        cerr << "Unknown command: " << option << endl;
+    if (command != "list_idle" && command != "list_busy" && command != "choose_idle") {
+        cerr << "Unknown command: " << command << endl;
         exit(1);
-    } else if (option == "list_busy") {
-        if (argc < 3) {
-            cerr << "Usage: wg list_busy [--json] [--rank]" << endl;
-            exit(1);
-        }
-        for (int i = 3; i < argc; ++i) {
+    } else if (command == string("list_busy")) {
+        for (int i = 2; i < argc; ++i) {
             string flag = argv[i];
             if (flag == "--json") {
                 json_output = true;
@@ -38,12 +28,14 @@ void CLIHandler::parse_args(int argc, char *argv[]) {
                 exit(1);
             }
         }
-    } else if (option == "list_idle") {
-        // Handle list_idle command
-        if (argc < 4) {
+    } else if (command == string("list_idle")) {
+        string option = argv[2];
+
+        if (option != "--idle" || argc < 4) {
             cerr << "Usage: wg list_idle --idle <GB> [--json] [--rank]" << endl;
             exit(1);
         }
+
         min_idle_gb = stoi(argv[3]);
         min_idle_gb_check();
 
@@ -58,10 +50,11 @@ void CLIHandler::parse_args(int argc, char *argv[]) {
                 exit(1);
             }
         }
-    } else if (option == "choose_idle") {
-        // Handle choose_idle command
-        if (argc < 4) {
-            cerr << "Usage: wg choose_idle --idle <GB> [--export|--yaml]" << endl;
+    } else if (command == string("choose_idle")) {
+        string option = argv[2];
+
+        if (option != "--idle" || argc < 4) {
+            cerr << "Usage: wg choose_idle --idle <GB> [--export|--yaml <path> --key <key>]" << endl;
             exit(1);
         }
         min_idle_gb = stoi(argv[3]);
