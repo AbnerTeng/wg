@@ -15,15 +15,14 @@ int main(int argc, char *argv[]) {
         std::cerr << "Error: --yaml requires both --yaml_path and --yaml_key to be specified." << std::endl;
         return 1;
       }
-      select_idle_gpu(
-        cli.min_idle_gb,
-        cli.export_env,
-        cli.yaml_inject,
-        cli.yaml_path.value(),
-        cli.yaml_key.value()
-      );
     }
-    select_idle_gpu(cli.min_idle_gb, cli.export_env, cli.yaml_inject, cli.yaml_path.value(), cli.yaml_key.value());
+    select_idle_gpu(
+      cli.min_idle_gb,
+      cli.export_env,
+      cli.yaml_inject,
+      cli.yaml_path.value_or(""),
+      cli.yaml_key.value_or("")
+    );
   } else {
     return 1;
   };
