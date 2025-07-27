@@ -9,11 +9,10 @@ include(FetchContent)
 FetchContent_Declare(
   yaml-cpp
   GIT_REPOSITORY https://github.com/jbeder/yaml-cpp.git
-  GIT_TAG v0.7.0
+  GIT_TAG yaml-cpp-0.7.0
 )
 FetchContent_MakeAvailable(yaml-cpp)
 
-target_link_libraries(wg PUBLIC yaml-cpp::yaml-cpp)
 set(
   SOURCES
   src/wg.cpp
@@ -23,3 +22,4 @@ set(
 
 add_executable(wg ${SOURCES})
 target_include_directories(wg PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+target_link_libraries(wg PUBLIC yaml-cpp::yaml-cpp)
