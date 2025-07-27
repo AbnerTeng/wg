@@ -23,7 +23,7 @@ jobs:
           cmake ..
           make -j$(nproc)
     - name: test CLI
-      run: ./buld/wg --help
+      run: ./build/wg --help
     - name: Upload Binary
       uses: softprops/action-gh-release@v1
       with:
