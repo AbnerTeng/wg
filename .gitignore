@@ -1,6 +1,7 @@
 config.yaml
 wg
 .vscode/
+build/
 # Prerequisites
 *.d
 
