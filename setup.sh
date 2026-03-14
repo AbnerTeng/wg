@@ -6,5 +6,5 @@ OS=$(uname | tr '[:upper:]' '[:lower:]')
 
 curl -Lo wg "https://github.com/AbnerTeng/wg/releases/download/${VERSION}/wg"
 chmod +x wg
-sudo mv wg $HOME/.local/bin/wg
+mv wg $HOME/.local/bin/wg
 echo "Installed wg successfully"

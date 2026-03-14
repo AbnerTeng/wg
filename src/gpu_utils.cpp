@@ -2,7 +2,7 @@
 #include "yaml-cpp/yaml.h"
 #include <algorithm>
 #include <cstdio>
-#include <cstdlib>
+#include <stdlib.h>
 #include <random>
 #include <sstream>
 #include <string>
@@ -41,6 +41,11 @@ vector<GPUInfo> get_gpu_info() {
     pclose(pipe);
 
     return gpus;
+}
+
+
+void rob(int gpu_index) {
+    // create huge tensor
 }
 
 
@@ -141,7 +146,7 @@ void list_busy_gpus(bool sort_by_memory, bool to_json) {
 }
 
 
-void select_idle_gpu(int min_idle_gb, bool export_env, bool yaml_inject, optional<string> yaml_path, optional<string> yaml_key) {
+void select_idle_gpu(int min_idle_gb, bool export_env, bool rob_gpu, bool yaml_inject, optional<string> yaml_path, optional<string> yaml_key) {
     int min_idle_mb = min_idle_gb * 1024;
     vector<GPUInfo> gpus = get_gpu_info();
     vector<int> eligible;
@@ -162,11 +167,15 @@ void select_idle_gpu(int min_idle_gb, bool export_env, bool yaml_inject, optiona
     mt19937 gen(rd());
     uniform_int_distribution<> dist(0, eligible.size() - 1);
     int chosen = eligible[dist(gen)];
+    string value = to_string(chosen);
 
     if (export_env) {
-        setenv("CUDA_VISIBLE_DEVICES", to_string(chosen).c_str(), 1);
+        setenv("CUDA_VISIBLE_DEVICES", value.c_str(), 1);
+    } else if (rob_gpu) {
+        rob(chosen);
+        cout << "cuda:" << chosen << " robbed" << endl;
     } else if (yaml_inject) {
-        inject_yaml(yaml_path.value(), yaml_key.value(), "cuda:" + to_string(chosen));
+        inject_yaml(yaml_path.value(), yaml_key.value(), "cuda:" + value);
     } else {
         cout << "cuda:" << chosen << endl;
     }

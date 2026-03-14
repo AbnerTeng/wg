@@ -51,12 +51,14 @@ void CLIHandler::parse_args(int argc, char *argv[]) {
         }
         min_idle_gb = stoi(argv[3]);
         min_idle_gb_check();
+
         for (int i = 4; i < argc; ++i) {
             string flag = argv[i];
+
             if (flag == "--export") {
                 export_env = true;
             } else if (flag == "--yaml") {
-                if (i + 3 >= argc || string(argv[i+2]) != "--key") {
+                if (argc < i + 3 || string(argv[i+2]) != "--key") {
                     cerr << "Usage: wg choose_idle --idle <GB> --yaml <path> --key <key>" << endl;
                     exit(1);
                 }

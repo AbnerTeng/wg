@@ -15,6 +15,7 @@ public:
         json_output = false;
         sort_by_memory = false;
         yaml_inject = false;
+        rob_gpu = false;
         yaml_path = std::nullopt;
         yaml_key = std::nullopt;
     }
@@ -28,6 +29,7 @@ public:
     bool json_output;
     bool sort_by_memory;
     bool yaml_inject;
+    bool rob_gpu;
     std::optional<std::string> yaml_path;
     std::optional<std::string> yaml_key;
 };

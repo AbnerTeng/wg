@@ -16,8 +16,28 @@ wg has three main functions:
 This CLI is linux-only and requires `nvidia-smi` to be installed. Once you have `nvidia-smi` installed, you can install this CLI using `setup.sh`
 
 ```bash
-chmod +x setup.sh && bash setup.sh
+mkdir build && cd build
+
+cmake ..
 ```
+
+Build the project based on `CMakeLists.txt`
+
+```bash
+make
+```
+
+After above commands, we can get a built execution file `wg` inside `./build`. You can `mv` this file into your personal local folder.
+
+```bash
+# inside build folder
+
+mv wg ~/.local/bin/
+
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+Then, you can type `wg`, `wg -h`, `wg --help` anywhere to see the instructions
 
 ## More Usage
 

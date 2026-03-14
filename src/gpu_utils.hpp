@@ -21,6 +21,7 @@ std::vector<GPUInfo> get_gpu_info();
 void list_idle_gpus(int min_idle_gb, bool sort_by_memory = false, bool to_json = false);
 void list_busy_gpus(bool sort_by_memory = false, bool to_json = false);
 void inject_yaml(const string& yaml_path, const string& yaml_key, const string& cuda_index);
-void select_idle_gpu(int min_idle_gb, bool export_env, bool yaml_inject, optional<string> yaml_path, optional<string> yaml_key);
+void select_idle_gpu(int min_idle_gb, bool export_env, bool rob_gpu, bool yaml_inject, optional<string> yaml_path, optional<string> yaml_key);
+void rob(int gpu_index);
 
 #endif // GPU_UTILS_H
